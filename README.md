@@ -1,4 +1,3 @@
-
 # TCS Exam Preparation Dashboard
 
 [Live Demo](https://tcs-nqt-preparation-tracker.vercel.app/)
