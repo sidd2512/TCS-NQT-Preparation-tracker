@@ -1,0 +1,393 @@
+/* styles.css - extracted from index.html */
+:root {
+    --primary: #3b82f6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --gray: #9ca3af;
+    --light-gray: #374151;
+    --dark: #111827;
+    --bg-dark: #1f2937;
+    --card-bg: #1f2937;
+    --bg-color: #1b1b20;
+    --card-color: #16213e;
+    --text-color: #e6e6e6;
+    --primary-color: #0f3460;
+    --secondary-color: #533483;
+    --accent-color: #00b894;
+    --overall-progress: #8a2be2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    background-color: var(--primary-color);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-tab {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-tab:hover, .nav-tab.active {
+    background-color: var(--secondary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Overall Progress */
+.overall-progress-container {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--light-gray);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #333;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.overall-progress-bar {
+    background-color: var(--overall-progress);
+}
+
+.aptitude-progress-bar {
+    background-color: var(--accent-color);
+}
+
+.coding-progress-bar {
+    background-color: var(--primary);
+}
+
+/* Topic-level progress bar */
+.topic-progress-container {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.topic-progress-bar-bg {
+    background: var(--light-gray);
+    height: 8px;
+    border-radius: 5px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    max-width: 100%;
+}
+.topic-progress-bar {
+    background: var(--accent-color);
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s;
+    width: 0%;
+    min-width: 0;
+    max-width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.topic-progress-text {
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-left: 10px;
+    min-width: 32px;
+    text-align: left;
+}
+
+
+/* Topics Container */
+.topics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.topic {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid var(--light-gray);
+}
+
+.topic-header {
+    padding: 15px 20px;
+    background-color: var(--dark);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.topic-header:hover {
+    background-color: #111827;
+}
+
+.topic-header::after {
+    content: '+';
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.topic-header.active::after {
+    content: '-';
+}
+
+.difficulty-levels, .subtopics {
+    display: none;
+    padding: 0 20px;
+    background-color: var(--dark);
+}
+
+.difficulty-levels.active, .subtopics.active {
+    display: block;
+}
+
+.difficulty, .subtopic {
+    margin: 15px 0;
+}
+
+.difficulty-header, .subtopic-header {
+    padding: 10px 15px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.easy .difficulty-header, .logical .subtopic-header {
+    background-color: #064e3b;
+    color: #6ee7b7;
+}
+
+.medium .difficulty-header, .verbal .subtopic-header {
+    background-color: #78350f;
+    color: #fcd34d;
+}
+
+.hard .difficulty-header, .quantitative .subtopic-header {
+    background-color: #7f1d1d;
+    color: #fca5a5;
+}
+
+.difficulty-header::after, .subtopic-header::after {
+    content: '+';
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.difficulty-header.active::after, .subtopic-header.active::after {
+    content: '-';
+}
+
+.questions-list, .topic-items {
+    display: none;
+    padding: 10px 0;
+}
+
+.questions-list.active, .topic-items.active {
+    display: block;
+}
+
+.question, .topic-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.question:last-child, .topic-item:last-child {
+    border-bottom: none;
+}
+
+.question-title, .topic-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.question-title:hover {
+    text-decoration: underline;
+    color: #93c5fd;
+}
+
+.question-link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    gap: 8px;
+}
+
+.leetcode-logo {
+    width: 20px;
+    height: 20px;
+    background-color: #ffa116;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.question-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(59, 130, 246, 0.1);
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.question-link:hover {
+    background-color: rgba(59, 130, 246, 0.2);
+    text-decoration: none;
+}
+
+.question-actions, .topic-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s;
+}
+
+.done-btn {
+    background-color: #ef4444; /* red */
+    color: #fff;
+    transition: background 0.2s, color 0.2s;
+}
+
+.done-btn:hover {
+    background-color: #dc2626; /* darker red */
+    color: #fff;
+}
+
+.done-btn.active {
+    background-color: #10b981; /* green */
+    color: #fff;
+}
+.done-btn.active:hover {
+    background-color: #059669; /* darker green */
+    color: #fff;
+}
+
+.revise-btn {
+    background-color: #78350f;
+    color: #fcd34d;
+}
+
+.revise-btn.active {
+    background-color: #fcd34d;
+    color: #78350f;
+}
+
+.status-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.status-done {
+    background-color: var(--success);
+}
+
+.status-revise {
+    background-color: var(--warning);
+}
+
+.status-pending {
+    background-color: var(--light-gray);
+}
+
+@media (max-width: 768px) {
+    .question, .topic-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .question-link-container {
+        justify-content: flex-start;
+        width: auto;
+    }
+    .question-actions, .topic-actions {
+        align-self: flex-end;
+    }
+}

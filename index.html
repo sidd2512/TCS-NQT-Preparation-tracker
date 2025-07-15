@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS Exam Preparation Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar" style="display: flex; justify-content: center;">
+        <div class="nav-tab active" data-section="aptitude">Aptitude</div>
+        <div class="nav-tab" data-section="coding">Coding</div>
+    </div>
+
+    <div class="container">
+        <!-- Overall Progress -->
+        <div class="overall-progress-container">
+            <div class="progress-header">
+                <h3>Overall Preparation Progress</h3>
+                <div id="overall-progress-percentage">0%</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar overall-progress-bar" id="overall-progress-fill" style="width: 0%"></div>
+            </div>
+            <!-- progress-stats removed -->
+           <div style="display: flex; width: 100%; gap: 2%;">
+             <div style="margin-top: 15px; width: 48%; ">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Aptitude Progress</span>
+                    <span id="aptitude-progress-percentage">0%</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar aptitude-progress-bar" id="aptitude-progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div style="margin-top: 15px; width: 48%;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Coding Progress</span>
+                    <span id="coding-progress-percentage">0%</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar coding-progress-bar" id="coding-progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+           </div>
+        </div>
+
+        <!-- Aptitude Section -->
+        <div class="section active" id="aptitude">
+            <h2>Aptitude Preparation</h2>
+            
+            <div class="topics-container" id="aptitude-topics-container">
+                <!-- Aptitude topics will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Coding Section -->
+        <div class="section" id="coding">
+            <h2>Coding Preparation</h2>
+            
+            <div class="topics-container" id="coding-topics-container">
+                <!-- Coding topics will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
