@@ -33,7 +33,7 @@ body {
 
 .navbar {
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--bg-dark);
     padding: 1rem;
     position: sticky;
     top: 0;
