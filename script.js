@@ -87,9 +87,26 @@ function initializeAptitudeSections() {
     topicProgressContainer.appendChild(topicProgressBarBg);
     topicProgressContainer.appendChild(topicProgressText);
 
+    // Count completed topics for this category
+    let completedCount = 0;
+    topics.forEach((topic) => {
+      const progress = JSON.parse(
+        localStorage.getItem("preparationDashboardProgress")
+      );
+      if (
+        progress &&
+        progress.aptitude &&
+        progress.aptitude[category] &&
+        progress.aptitude[category][topic] &&
+        progress.aptitude[category][topic].done
+      ) {
+        completedCount++;
+      }
+    });
+
     const topicHeader = document.createElement("div");
     topicHeader.className = "topic-header";
-    topicHeader.textContent = category;
+    topicHeader.innerHTML = `<span class="topic-header-title">${category}</span><span class="topic-count">${completedCount}/${topics.length}</span>`;
 
     const subtopics = document.createElement("div");
     subtopics.className = "subtopics";
@@ -130,6 +147,8 @@ function initializeAptitudeSections() {
           topicProgressText
         );
         saveProgress();
+        // Update the completed/total count in the topic header
+        updateAptitudeTopicCount(category, topicHeader, topics);
       });
       reviseBtn.addEventListener("click", function () {
         this.dataset.state =
@@ -144,6 +163,8 @@ function initializeAptitudeSections() {
           topicProgressText
         );
         saveProgress();
+        // Update the completed/total count in the topic header
+        updateAptitudeTopicCount(category, topicHeader, topics);
       });
       topicActions.appendChild(doneBtn);
       topicActions.appendChild(reviseBtn);
@@ -169,6 +190,24 @@ function initializeAptitudeSections() {
       topicProgressBar,
       topicProgressText
     );
+    // Initial update for topic count
+    updateAptitudeTopicCount(category, topicHeader, topics);
+    // Update the completed/total count in the topic header for aptitude
+    function updateAptitudeTopicCount(category, topicHeader, topics) {
+      let completedCount = 0;
+      topics.forEach((topic) => {
+        const btn = document.querySelector(
+          `.done-btn[data-category="${category}"][data-topic="${topic}"]`
+        );
+        if (btn && btn.dataset.state === "active") {
+          completedCount++;
+        }
+      });
+      const countSpan = topicHeader.querySelector(".topic-count");
+      if (countSpan) {
+        countSpan.textContent = `${completedCount}/${topics.length}`;
+      }
+    }
   }
 }
 
@@ -218,9 +257,31 @@ function initializeCodingSection() {
     topicProgressContainer.appendChild(topicProgressBarBg);
     topicProgressContainer.appendChild(topicProgressText);
 
+    // Count completed questions for this topic
+    let completedCount = 0;
+    let totalCount = 0;
+    for (const [difficulty, questions] of Object.entries(difficulties)) {
+      totalCount += questions.length;
+      const progress = JSON.parse(
+        localStorage.getItem("preparationDashboardProgress")
+      );
+      questions.forEach((question) => {
+        if (
+          progress &&
+          progress.coding &&
+          progress.coding[topic] &&
+          progress.coding[topic][difficulty] &&
+          progress.coding[topic][difficulty][question.title] &&
+          progress.coding[topic][difficulty][question.title].done
+        ) {
+          completedCount++;
+        }
+      });
+    }
+
     const topicHeader = document.createElement("div");
     topicHeader.className = "topic-header";
-    topicHeader.textContent = topic;
+    topicHeader.innerHTML = `<span class="topic-header-title">${topic}</span><span class="topic-count">${completedCount}/${totalCount}</span>`;
 
     const difficultyLevels = document.createElement("div");
     difficultyLevels.className = "difficulty-levels";
@@ -284,6 +345,8 @@ function initializeCodingSection() {
             topicProgressText
           );
           saveProgress();
+          // Update the completed/total count in the topic header
+          updateCodingTopicCount(topic, topicHeader, totalCount);
         });
         reviseBtn.addEventListener("click", function () {
           this.dataset.state =
@@ -298,6 +361,8 @@ function initializeCodingSection() {
             topicProgressText
           );
           saveProgress();
+          // Update the completed/total count in the topic header
+          updateCodingTopicCount(topic, topicHeader, totalCount);
         });
         questionActions.appendChild(doneBtn);
         questionActions.appendChild(reviseBtn);
@@ -326,6 +391,24 @@ function initializeCodingSection() {
 
     // Initial update for this topic's progress bar
     updateTopicProgressBar_Coding(topic, topicProgressBar, topicProgressText);
+    // Initial update for topic count
+    updateCodingTopicCount(topic, topicHeader, totalCount);
+    // Update the completed/total count in the topic header for coding
+    function updateCodingTopicCount(topic, topicHeader, totalCount) {
+      let completedCount = 0;
+      const btns = document.querySelectorAll(
+        `.done-btn[data-topic="${topic}"]`
+      );
+      btns.forEach((btn) => {
+        if (btn && btn.dataset.state === "active") {
+          completedCount++;
+        }
+      });
+      const countSpan = topicHeader.querySelector(".topic-count");
+      if (countSpan) {
+        countSpan.textContent = `${completedCount}/${totalCount}`;
+      }
+    }
   }
 }
 // Enhanced navbar logic for section switching and resources scroll

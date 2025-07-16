@@ -197,6 +197,82 @@ export const codingData = {
         title: "Number of Senior Citizens",
         link: "https://leetcode.com/problems/number-of-senior-citizens/",
       },
+      {
+        title: "Sum of Elements in Array",
+        link: "https://www.geeksforgeeks.org/program-find-sum-elements-given-array/",
+      },
+      {
+        title: "Remove Duplicates from Sorted Array",
+        link: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+      },
+      {
+        title: "Find Second Largest Element in Array",
+        link: "https://www.geeksforgeeks.org/find-second-largest-element-array/",
+      },
+      {
+        title: "Sort Array of 0s, 1s and 2s",
+        link: "https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1",
+      },
+      {
+        title: "Number of Good Pairs",
+        link: "https://leetcode.com/problems/number-of-good-pairs/",
+      },
+      {
+        title: "Next Greater Element I",
+        link: "https://leetcode.com/problems/next-greater-element-i/",
+      },
+      {
+        title: "Union of Two Sorted Arrays",
+        link: "https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1",
+      },
+      {
+        title: "Pascal's Triangle",
+        link: "https://leetcode.com/problems/pascals-triangle/",
+      },
+      {
+        title: "Find and Replace in String",
+        link: "https://www.geeksforgeeks.org/problems/find-an-replace-in-string/1",
+      },
+      {
+        title: "Reverse a String in Java",
+        link: "https://www.geeksforgeeks.org/reverse-a-string-in-java/",
+      },
+      {
+        title: "Print Character Frequencies in Order of Occurrence",
+        link: "https://www.geeksforgeeks.org/print-characters-frequencies-order-occurrence/",
+      },
+      {
+        title: "Remove Characters from First String Present in Second String",
+        link: "https://www.geeksforgeeks.org/remove-characters-from-the-first-string-which-are-present-in-the-second-string/",
+      },
+      {
+        title: "Find Common Characters",
+        link: "https://leetcode.com/problems/find-common-characters/",
+      },
+      {
+        title: "Largest Odd Number in String",
+        link: "https://leetcode.com/problems/largest-odd-number-in-string/",
+      },
+      {
+        title: "Count Binary Substrings",
+        link: "https://leetcode.com/problems/count-binary-substrings/",
+      },
+      {
+        title: "Rotate String",
+        link: "https://leetcode.com/problems/rotate-string/",
+      },
+      {
+        title: "Excel Sheet Column Number",
+        link: "https://leetcode.com/problems/excel-sheet-column-number/",
+      },
+      {
+        title: "Check if String is Palindrome",
+        link: "https://www.geeksforgeeks.org/c-program-check-given-string-palindrome/",
+      },
+      {
+        title: "Implement strStr",
+        link: "https://www.geeksforgeeks.org/problems/implement-strstr/1",
+      },
     ],
     Medium: [
       {
@@ -230,6 +306,38 @@ export const codingData = {
       {
         title: "Number of Pairs of Strings With Concaten",
         link: "https://leetcode.com/problems/number-of-pairs-of-strings-with-concaten/",
+      },
+      {
+        title: "Subarray Sum Equals K",
+        link: "https://leetcode.com/problems/subarray-sum-equals-k/",
+      },
+      {
+        title: "Sliding Window Maximum (GeeksforGeeks)",
+        link: "https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/",
+      },
+      {
+        title: "Mean and Median of Unsorted Array",
+        link: "https://www.geeksforgeeks.org/program-for-mean-and-median-of-an-unsorted-array/",
+      },
+      {
+        title: "Count All Possible Paths from Top Left to Bottom Right",
+        link: "https://www.geeksforgeeks.org/problems/count-all-possible-paths-from-top-left-to-bottom-right3011/1",
+      },
+      {
+        title: "Majority Element",
+        link: "https://www.geeksforgeeks.org/problems/majority-element-1587115620/1",
+      },
+      {
+        title: "Count Unique Characters of All Substrings",
+        link: "https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/",
+      },
+      {
+        title: "Sort Characters By Frequency",
+        link: "https://leetcode.com/problems/sort-characters-by-frequency/",
+      },
+      {
+        title: "Count Number of Substrings",
+        link: "https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1",
       },
     ],
     Hard: [

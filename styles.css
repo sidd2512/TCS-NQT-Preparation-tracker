@@ -172,7 +172,21 @@ body {
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
+    gap: 4%;
 }
+
+.topic-header-title {
+    flex: 1;
+    text-align: left;
+   
+}
+
+.topic-count {
+    margin-left: 16px;
+    min-width: 48px;
+    text-align: right;
+}
+
 
 .topic-header:hover {
     background-color: #111827;
