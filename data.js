@@ -49,6 +49,90 @@ export const aptitudeData = {
 };
 
 export const codingData = {
+  "Resource Links": {
+    pdf: [
+      {
+        title: "Campusmonk DSA Black Book ",
+        link: "https://cdn-wl-assets.classplus.co/production/44032/3fd20138-b1d4-4a15-961b-b458ba206aff.pdf",
+      },
+    ],
+  },
+  "Number System": {
+    Easy: [
+      {
+        title: "Sum Fibonacci Numbers",
+        link: "https://www.geeksforgeeks.org/sum-fibonacci-numbers/",
+      },
+      {
+        title: "Sum of Elements in Array",
+        link: "https://www.geeksforgeeks.org/program-find-sum-elements-given-array/",
+      },
+      {
+        title: "Armstrong Numbers",
+        link: "https://www.geeksforgeeks.org/problems/armstrong-numbers2727/1",
+      },
+      {
+        title: "Palindrome Number",
+        link: "https://www.geeksforgeeks.org/problems/palindrome0746/1",
+      },
+      {
+        title: "Divisible by 9",
+        link: "https://www.geeksforgeeks.org/check-large-number-divisible-9-not/",
+      },
+      {
+        title: "Leap Year",
+        link: "https://www.geeksforgeeks.org/problems/leap-year0943/1",
+      },
+      {
+        title: "Floating Point Even or Odd",
+        link: "https://www.geeksforgeeks.org/problems/floating-point-number-even-or-odd0146/1",
+      },
+      {
+        title: "Area of Intersection of Two Circles",
+        link: "https://www.geeksforgeeks.org/problems/area-of-intersection-of-two-circles0653/1",
+      },
+      {
+        title: "Odd or Even",
+        link: "https://www.geeksforgeeks.org/problems/odd-or-even3618/1",
+      },
+      {
+        title: "Perfect Number",
+        link: "https://www.geeksforgeeks.org/perfect-number/",
+      },
+      {
+        title: "Maximum Product of Three Numbers",
+        link: "https://leetcode.com/problems/maximum-product-of-three-numbers/",
+      },
+      {
+        title: "Power of Two",
+        link: "https://leetcode.com/problems/power-of-two/",
+      },
+      {
+        title: "Pow(x, n)",
+        link: "https://leetcode.com/problems/powx-n/",
+      },
+      {
+        title: "Swap Two Numbers",
+        link: "https://www.geeksforgeeks.org/problems/swap-two-numbers3844/1",
+      },
+      {
+        title: "Climbing Stairs",
+        link: "https://leetcode.com/problems/climbing-stairs/",
+      },
+      {
+        title: "Find All Factors of a Natural Number",
+        link: "https://www.geeksforgeeks.org/find-all-factors-of-a-natural-number-in-sorted-order/",
+      },
+      {
+        title: "Convert a Number to Hexadecimal",
+        link: "https://leetcode.com/problems/convert-a-number-to-hexadecimal/",
+      },
+      {
+        title: "Happy Number",
+        link: "https://leetcode.com/problems/happy-number/",
+      },
+    ],
+  },
   "Arrays/Strings": {
     Easy: [
       {
