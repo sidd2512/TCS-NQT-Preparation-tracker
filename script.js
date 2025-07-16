@@ -194,18 +194,22 @@ function initializeAptitudeSections() {
     updateAptitudeTopicCount(category, topicHeader, topics);
     // Update the completed/total count in the topic header for aptitude
     function updateAptitudeTopicCount(category, topicHeader, topics) {
+      // Only count .done-btns within this topic section
+      const topicDiv = topicHeader.closest(".topic");
       let completedCount = 0;
-      topics.forEach((topic) => {
-        const btn = document.querySelector(
-          `.done-btn[data-category="${category}"][data-topic="${topic}"]`
-        );
-        if (btn && btn.dataset.state === "active") {
-          completedCount++;
-        }
-      });
+      let totalCount = 0;
+      if (topicDiv) {
+        const btns = topicDiv.querySelectorAll(".done-btn");
+        totalCount = btns.length;
+        btns.forEach((btn) => {
+          if (btn.dataset.state === "active") completedCount++;
+        });
+      } else {
+        totalCount = topics.length;
+      }
       const countSpan = topicHeader.querySelector(".topic-count");
       if (countSpan) {
-        countSpan.textContent = `${completedCount}/${topics.length}`;
+        countSpan.textContent = `${completedCount}/${totalCount}`;
       }
     }
   }
@@ -395,15 +399,15 @@ function initializeCodingSection() {
     updateCodingTopicCount(topic, topicHeader, totalCount);
     // Update the completed/total count in the topic header for coding
     function updateCodingTopicCount(topic, topicHeader, totalCount) {
+      // Only count .done-btns within this topic section
+      const topicDiv = topicHeader.closest(".topic");
       let completedCount = 0;
-      const btns = document.querySelectorAll(
-        `.done-btn[data-topic="${topic}"]`
-      );
-      btns.forEach((btn) => {
-        if (btn && btn.dataset.state === "active") {
-          completedCount++;
-        }
-      });
+      if (topicDiv) {
+        const btns = topicDiv.querySelectorAll(".done-btn");
+        btns.forEach((btn) => {
+          if (btn.dataset.state === "active") completedCount++;
+        });
+      }
       const countSpan = topicHeader.querySelector(".topic-count");
       if (countSpan) {
         countSpan.textContent = `${completedCount}/${totalCount}`;
@@ -530,29 +534,64 @@ function saveProgress() {
     aptitude: {},
     coding: {},
   };
-  // Save aptitude progress
-  document.querySelectorAll("#aptitude .topic-item").forEach((item) => {
-    const category = item.querySelector(".done-btn").dataset.category;
-    const topic = item.querySelector(".done-btn").dataset.topic;
-    if (!progress.aptitude[category]) progress.aptitude[category] = {};
-    progress.aptitude[category][topic] = {
-      done: item.querySelector(".done-btn").dataset.state === "active",
-      revise: item.querySelector(".revise-btn").dataset.state === "active",
-    };
-  });
-  // Save coding progress
-  document.querySelectorAll("#coding .question").forEach((question) => {
-    const topic = question.querySelector(".done-btn").dataset.topic;
-    const difficulty = question.querySelector(".done-btn").dataset.difficulty;
-    const questionTitle = question.querySelector(".done-btn").dataset.question;
-    if (!progress.coding[topic]) progress.coding[topic] = {};
-    if (!progress.coding[topic][difficulty])
-      progress.coding[topic][difficulty] = {};
-    progress.coding[topic][difficulty][questionTitle] = {
-      done: question.querySelector(".done-btn").dataset.state === "active",
-      revise: question.querySelector(".revise-btn").dataset.state === "active",
-    };
-  });
+  // Save aptitude progress and completed count per category
+  const aptitudeCompletedCounts = {};
+  document
+    .querySelectorAll("#aptitude-topics-container .topic")
+    .forEach((topicDiv) => {
+      const header = topicDiv.querySelector(".topic-header");
+      const category = header
+        ?.querySelector(".topic-header-title")
+        ?.textContent?.trim();
+      if (!category) return;
+      const btns = topicDiv.querySelectorAll(".done-btn");
+      let completed = 0;
+      btns.forEach((btn) => {
+        const topic = btn.dataset.topic;
+        if (!progress.aptitude[category]) progress.aptitude[category] = {};
+        if (!progress.aptitude[category][topic])
+          progress.aptitude[category][topic] = {};
+        progress.aptitude[category][topic].done =
+          btn.dataset.state === "active";
+        progress.aptitude[category][topic].revise =
+          topicDiv.querySelector('.revise-btn[data-topic="' + topic + '"]')
+            ?.dataset.state === "active";
+        if (btn.dataset.state === "active") completed++;
+      });
+      aptitudeCompletedCounts[category] = completed;
+    });
+  progress.aptitudeCompletedCounts = aptitudeCompletedCounts;
+
+  // Save coding progress and completed count per topic
+  const codingCompletedCounts = {};
+  document
+    .querySelectorAll("#coding-topics-container .topic")
+    .forEach((topicDiv) => {
+      const header = topicDiv.querySelector(".topic-header");
+      const topic = header
+        ?.querySelector(".topic-header-title")
+        ?.textContent?.trim();
+      if (!topic) return;
+      const btns = topicDiv.querySelectorAll(".done-btn");
+      let completed = 0;
+      btns.forEach((btn) => {
+        const difficulty = btn.dataset.difficulty;
+        const questionTitle = btn.dataset.question;
+        if (!progress.coding[topic]) progress.coding[topic] = {};
+        if (!progress.coding[topic][difficulty])
+          progress.coding[topic][difficulty] = {};
+        progress.coding[topic][difficulty][questionTitle] = {
+          done: btn.dataset.state === "active",
+          revise:
+            topicDiv.querySelector(
+              '.revise-btn[data-question="' + questionTitle + '"]'
+            )?.dataset.state === "active",
+        };
+        if (btn.dataset.state === "active") completed++;
+      });
+      codingCompletedCounts[topic] = completed;
+    });
+  progress.codingCompletedCounts = codingCompletedCounts;
   // Removed localStorage values for overall-count, aptitude-count, coding-count
   localStorage.setItem(
     "preparationDashboardProgress",
@@ -626,4 +665,55 @@ function loadProgress() {
   updateAptitudeProgress();
   updateCodingProgress();
   updateOverallProgress();
+
+  // Use saved completed counts for each topic to update the UI
+  setTimeout(() => {
+    // Aptitude
+    const aptitudeCompletedCounts = progress.aptitudeCompletedCounts || {};
+    document
+      .querySelectorAll("#aptitude-topics-container .topic")
+      .forEach((topicDiv) => {
+        const header = topicDiv.querySelector(".topic-header");
+        const bar = topicDiv.querySelector(".topic-progress-bar");
+        const text = topicDiv.querySelector(".topic-progress-text");
+        const category = header
+          ?.querySelector(".topic-header-title")
+          ?.textContent?.trim();
+        const btns = topicDiv.querySelectorAll(".done-btn");
+        const totalCount = btns.length;
+        const completed = aptitudeCompletedCounts[category] || 0;
+        if (header && bar && text) {
+          // Set progress bar and count
+          const percent =
+            totalCount > 0 ? Math.round((completed / totalCount) * 100) : 0;
+          bar.style.width = percent + "%";
+          text.textContent = percent + "%";
+          const countSpan = header.querySelector(".topic-count");
+          if (countSpan) countSpan.textContent = `${completed}/${totalCount}`;
+        }
+      });
+    // Coding
+    const codingCompletedCounts = progress.codingCompletedCounts || {};
+    document
+      .querySelectorAll("#coding-topics-container .topic")
+      .forEach((topicDiv) => {
+        const header = topicDiv.querySelector(".topic-header");
+        const bar = topicDiv.querySelector(".topic-progress-bar");
+        const text = topicDiv.querySelector(".topic-progress-text");
+        const topic = header
+          ?.querySelector(".topic-header-title")
+          ?.textContent?.trim();
+        const btns = topicDiv.querySelectorAll(".done-btn");
+        const totalCount = btns.length;
+        const completed = codingCompletedCounts[topic] || 0;
+        if (header && bar && text) {
+          const percent =
+            totalCount > 0 ? Math.round((completed / totalCount) * 100) : 0;
+          bar.style.width = percent + "%";
+          text.textContent = percent + "%";
+          const countSpan = header.querySelector(".topic-count");
+          if (countSpan) countSpan.textContent = `${completed}/${totalCount}`;
+        }
+      });
+  }, 0);
 }
