@@ -1,3 +1,21 @@
+// Resource links for the Resources section
+export const resourceLinks = [
+  {
+    title: "CampusMonk DSA Black Book",
+    link: "https://campusmonk.com/",
+    label: "pdf link",
+  },
+  {
+    title: "GFG DSA Sheet",
+    link: "https://www.geeksforgeeks.org/dsa/tcs-sde-sheet-interview-questions-and-answers/",
+    label: "TCS SDE Sheet (GeeksforGeeks) link",
+  },
+  {
+    title: "GFG Test Series",
+    link: "https://www.geeksforgeeks.org/courses/tcs-interview-preparation",
+    label: "TCS Interview Preparation (GeeksforGeeks) link",
+  },
+];
 // data.js - contains constant data for the dashboard
 
 export const aptitudeData = {

@@ -1,6 +1,7 @@
-import { aptitudeData, codingData } from "./data.js";
+import { aptitudeData, codingData, resourceLinks } from "./data.js";
 
 // Initialize the app when DOM is loaded
+
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize navigation tabs
   setupNavigation();
@@ -8,11 +9,33 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeAptitudeSections();
   // Initialize coding section
   initializeCodingSection();
+  // Render resources section
+  renderResourcesSection();
   // Load progress from localStorage
   loadProgress();
   // Calculate initial overall progress
   updateOverallProgress();
 });
+
+function renderResourcesSection() {
+  const resourcesSection = document.getElementById("resources");
+  if (!resourcesSection) return;
+  resourcesSection.innerHTML = `
+    <h2 class="resources-title">Resources</h2>
+    <div id="resource-cards"></div>
+    <p class="resources-note">More resources will be added in the future.</p>
+  `;
+  const cardsContainer = resourcesSection.querySelector("#resource-cards");
+  resourceLinks.forEach((resource) => {
+    const card = document.createElement("div");
+    card.className = "resource-card";
+    card.innerHTML = `
+      <span class="resource-card-title">${resource.title}</span>
+      <a class="resource-card-link" href="${resource.link}" target="_blank" rel="noopener">${resource.label}</a>
+    `;
+    cardsContainer.appendChild(card);
+  });
+}
 
 function setupNavigation() {
   const navTabs = document.querySelectorAll(".nav-tab");
@@ -305,7 +328,33 @@ function initializeCodingSection() {
     updateTopicProgressBar_Coding(topic, topicProgressBar, topicProgressText);
   }
 }
-
+// Enhanced navbar logic for section switching and resources scroll
+document.addEventListener("DOMContentLoaded", function () {
+  const navTabs = document.querySelectorAll(".nav-tab");
+  const sections = {
+    aptitude: document.getElementById("aptitude"),
+    coding: document.getElementById("coding"),
+    resources: document.getElementById("resources"),
+  };
+  navTabs.forEach((tab) => {
+    tab.addEventListener("click", function () {
+      navTabs.forEach((t) => t.classList.remove("active"));
+      this.classList.add("active");
+      // Hide all sections
+      Object.values(sections).forEach((sec) => (sec.style.display = "none"));
+      // Show the selected section
+      const section = sections[this.dataset.section];
+      if (section) {
+        section.style.display = "";
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+  // Show only aptitude section by default
+  sections.aptitude.style.display = "";
+  sections.coding.style.display = "none";
+  sections.resources.style.display = "none";
+});
 function updateTopicProgressBar_Coding(topic, bar, text) {
   // Find all done-btns for this topic
   const items = document.querySelectorAll(`.done-btn[data-topic="${topic}"]`);

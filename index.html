@@ -19,11 +19,12 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<div>
     <h1 style="text-align:center; font-size:2.5rem; padding-top: 2rem; color:#fff; font-weight:800;  letter-spacing:1px;">TCS Preparation Tracker</h1>
     <div class="navbar" style="display: flex; justify-content: center;">
         <div class="nav-tab active" data-section="aptitude">Aptitude</div>
         <div class="nav-tab" data-section="coding">Coding</div>
+        <div class="nav-tab" data-section="resources">Resources</div>
     </div>
 
     <div class="container">
@@ -76,8 +77,27 @@
                 <!-- Coding topics will be inserted here by JavaScript -->
             </div>
         </div>
+        <!-- Resources Section -->
+        <div class="container section" id="resources" style="margin-top: 32px; display:none;">
+            <h2 style="margin-bottom: 12px; color: #232526;">Resources</h2>
+            <ul style="list-style: disc inside; font-size: 1.08rem; color: #222;">
+                <li>
+                    <strong>CampusMonk DSA Black Book</strong> – <a href="https://campusmonk.com/" target="_blank" rel="noopener">campusmonk.com</a>
+                </li>
+                <li>
+                    <strong>GFG DSA Sheet</strong> – <a href="https://www.geeksforgeeks.org/dsa/tcs-sde-sheet-interview-questions-and-answers/" target="_blank" rel="noopener">TCS SDE Sheet (GeeksforGeeks)</a>
+                </li>
+                <li>
+                    <strong>GFG Test Series</strong> – <a href="https://www.geeksforgeeks.org/courses/tcs-interview-preparation" target="_blank" rel="noopener">TCS Interview Preparation (GeeksforGeeks)</a>
+                </li>
+            </ul>
+            <p style="margin-top: 10px; color: #666; font-size: 0.98rem;">More resources will be added in the future.</p>
+        </div>
     </div>
 
     <script type="module" src="script.js"></script>
+</div>
+
+
 </body>
 </html>
