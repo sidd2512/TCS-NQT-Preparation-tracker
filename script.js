@@ -505,20 +505,26 @@ function updateCodingProgress() {
 }
 
 function updateOverallProgress() {
-  // Calculate aptitude progress
+  // Calculate aptitude progress (as percent)
   const aptitudeTopics = document.querySelectorAll("#aptitude .topic-item");
   const aptitudeDone = document.querySelectorAll(
     '#aptitude .done-btn[data-state="active"]'
   ).length;
-  // Calculate coding progress
+  const aptitudeTotal = aptitudeTopics.length;
+  const aptitudePercent =
+    aptitudeTotal > 0 ? (aptitudeDone / aptitudeTotal) * 100 : 0;
+
+  // Calculate coding progress (as percent)
   const codingQuestions = document.querySelectorAll("#coding .question");
   const codingDone = document.querySelectorAll(
     '#coding .done-btn[data-state="active"]'
   ).length;
-  const totalItems = aptitudeTopics.length + codingQuestions.length;
-  const completedItems = aptitudeDone + codingDone;
-  const percentage =
-    totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+  const codingTotal = codingQuestions.length;
+  const codingPercent = codingTotal > 0 ? (codingDone / codingTotal) * 100 : 0;
+
+  // Weighted overall: 60% aptitude, 40% coding
+  const percentage = Math.round(aptitudePercent * 0.6 + codingPercent * 0.4);
+
   // Update overall progress
   document.getElementById(
     "overall-progress-fill"
